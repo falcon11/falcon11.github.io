@@ -357,6 +357,86 @@ ga('send', 'pageview');
 
 
   
+    <article id="post-黑苹果-10-14-6-升级-10-15-4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/15/黑苹果-10-14-6-升级-10-15-4/">黑苹果 10.14.6 升级 10.15.4</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/15/黑苹果-10-14-6-升级-10-15-4/" class="archive-article-date">
+  	<time datetime="2020-11-15T14:02:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这周五晚上手贱升级了黑苹果，一个愉快（😭）的周末就这样开始了。<br>先贴下我台式机的配置:</p>
+<blockquote>
+<p>CPU: i7-8700<br>主板: Z370 Aorus Ultra Gaming 2.0<br>内存: 芝奇（G.SKILL）幻光戟RGB灯条(C16) 32GB(8G×4) DDR4 3200频率<br>无线网卡: BCM943602CS千兆双频5G无线网卡蓝牙4.1</p>
+</blockquote>
+<p>原系统: 10.14.6; Clover 版本: r48xx<br>要升级的系统: 10.15.4</p>
+        
+          <a class="article-more-a" href="/2020/11/15/黑苹果-10-14-6-升级-10-15-4/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">hackintosh</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/15/黑苹果-10-14-6-升级-10-15-4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-cordova-allow-navigation、allow-intent-解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1091,96 +1171,6 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-react-native-日期格式化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/10/react-native-日期格式化/">react-native 日期格式化</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/10/react-native-日期格式化/" class="archive-article-date">
-  	<time datetime="2018-07-10T06:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天在 react native 项目中，遇到了一个日期格式化的问题，做下笔记</p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>当App开启调试模式时<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2018-07-07T22:44:14.000+0800'</span>); <span class="comment">// Sat Jul 07 2018 22:44:14 GMT+0800 (中国标准时间)</span></span><br></pre></td></tr></table></figure></p>
-<p>就这样很开心提交代码打包。第二天发现客户端显示日期不对，显示 <strong>Invalid Date</strong>，😫。<br>经过重复实验，发现<br>当关闭调试模式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2018-07-07T22:44:14.000+0800'</span>); <span class="comment">// Invilid Date</span></span><br></pre></td></tr></table></figure></p>
-<p>终于重现问题。</p>
-        
-          <a class="article-more-a" href="/2018/07/10/react-native-日期格式化/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">react-native</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Javascript//" class="article-tag-list-link color1">Javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/10/react-native-日期格式化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1378,7 +1368,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">de bu g</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">debug</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">hackintosh</a>
               </li>
             
             <div class="clearfix"></div>
