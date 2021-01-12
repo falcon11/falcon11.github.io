@@ -174,6 +174,129 @@ ga('send', 'pageview');
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-umi-微前端方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/12/umi-微前端方案/">umi 微前端方案</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/12/umi-微前端方案/" class="archive-article-date">
+  	<time datetime="2021-01-12T06:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://umijs.org/" target="_blank" rel="noopener">umi</a> 的微前端方案是 <a href="https://qiankun.umijs.org/" target="_blank" rel="noopener">qiankun</a>。本文通过举例介绍 umi 中怎么用 qiankun 搭建主应用和子应用。</p>
+<h2 id="创建主应用"><a href="#创建主应用" class="headerlink" title="创建主应用"></a>创建主应用</h2><p>1.新建主工程</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir main &amp;&amp; <span class="built_in">cd</span> main</span><br><span class="line">yarn create @umijs/umi-app</span><br><span class="line">yarn</span><br></pre></td></tr></table></figure>
+<p>2.安装 qiankun 插件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add @umijs/plugin-qiankun -D</span><br></pre></td></tr></table></figure>
+<h2 id="创建子应用"><a href="#创建子应用" class="headerlink" title="创建子应用"></a>创建子应用</h2><p>回到主工程同级目录</p>
+<p>1.新建子工程 micro-app-a</p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir micro-app<span class="_">-a</span> &amp;&amp; <span class="built_in">cd</span> micro-app<span class="_">-a</span></span><br><span class="line">yarn create @umijs/umi-app</span><br><span class="line">yarn</span><br></pre></td></tr></table></figure>
+<p>2.安装 qiankun 插件</p>
+<pre><code><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add @umijs/plugin-qiankun -D</span><br></pre></td></tr></table></figure>
+</code></pre><p>3.配置</p>
+<p><strong>.umirc.ts</strong></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .umirc.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">'umi'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineConfig(&#123;</span><br><span class="line">  nodeModulesTransform: &#123;</span><br><span class="line">    <span class="keyword">type</span>: <span class="string">'none'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  history: &#123;</span><br><span class="line">    <span class="keyword">type</span>: <span class="string">'browser'</span>,  <span class="comment">// 配置 history 为 'browser' 类型</span></span><br><span class="line">  &#125;,</span><br><span class="line">  base: <span class="string">'/micro-app-a/'</span>,  <span class="comment">// 微应用将部署在名为 micro-app-a 的子目录</span></span><br><span class="line">  publicPath: <span class="string">'/micro-app-a/'</span>,  <span class="comment">// 微应用将部署在名为 micro-app-a 的子目录</span></span><br><span class="line">  <span class="comment">// qiankun 配置，slave 说明这是子应用</span></span><br><span class="line">  qiankun: &#123;</span><br><span class="line">    slave: &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>package.json</strong><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">"start": "PORT=8001 umi dev",	// 指定子应用启动端口</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置主应用"><a href="#配置主应用" class="headerlink" title="配置主应用"></a>配置主应用</h2><p>回到主应用</p>
+<p>1.配置会用到的子应用: 在主应用目录下新建 <code>config/microApps.js</code> 文件，里面添加如下内容</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> apps = [</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'micro-app-a'</span>,    <span class="comment">// 子应用名称</span></span><br><span class="line">    entry:</span><br><span class="line">      process.env.NODE_ENV === <span class="string">'development'</span></span><br><span class="line">        ? <span class="string">'//localhost:8001/micro-app-a'</span></span><br><span class="line">        : <span class="string">'/micro-app-a'</span>,   <span class="comment">// 子应用入口</span></span><br><span class="line">    codePath: <span class="string">'micro-app-a'</span>,    <span class="comment">// 子应用工程目录名称，打包脚本会用到这参数</span></span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = apps;</span><br></pre></td></tr></table></figure>
+<p>2.<strong>.umirc.ts</strong>配置</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">'umi'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> apps = <span class="built_in">require</span>(<span class="string">'./config/microApps'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineConfig(&#123;</span><br><span class="line">  nodeModulesTransform: &#123;</span><br><span class="line">    <span class="keyword">type</span>: <span class="string">'none'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/'</span>,</span><br><span class="line">      component: <span class="string">'@/pages/index'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; path: <span class="string">'/micro-app-a'</span>, microApp: <span class="string">'micro-app-a'</span> &#125;, <span class="comment">// 子应用路由</span></span><br><span class="line">  ],</span><br><span class="line">  history: &#123;</span><br><span class="line">    <span class="keyword">type</span>: <span class="string">'browser'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  qiankun: &#123;</span><br><span class="line">    master: &#123;</span><br><span class="line">      apps,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>3.在 pages 下创建 <code>micro-app-a</code> 页面，<code>micro-app-a/index.tsx</code> 内容如下</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; MicroApp &#125; <span class="keyword">from</span> <span class="string">'umi'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="comment">// name 是 config/microApps.js 里配置的</span></span><br><span class="line">  <span class="keyword">return</span> &lt;MicroApp name="micro-app-a" /&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>4.主应用跳转子应用</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./index.less'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; history &#125; <span class="keyword">from</span> <span class="string">'umi'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1 className=&#123;styles.title&#125;&gt;Page index&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">      &lt;button</span></span><br><span class="line"><span class="regexp">        onClick=&#123;() =&gt; &#123;</span></span><br><span class="line"><span class="regexp">          history.push('/mi</span>cro-app-a<span class="string">');</span></span><br><span class="line"><span class="string">        &#125;&#125;</span></span><br><span class="line"><span class="string">      &gt;</span></span><br><span class="line"><span class="string">        push micro-app-a</span></span><br><span class="line"><span class="string">      &lt;/button&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  );</span></span><br><span class="line"><span class="string">&#125;;</span></span><br></pre></td></tr></table></figure>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>此时分别运行 <code>yarn start</code> 启动主应用和子应用就可以从主应用跳转子应用</p>
+<h2 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h2><p>这里打包方案是将子应用打包到主应用目录下一起部署，为了方便打包，在主工程下写了个打包脚本 <code>scripts/build.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> child_process = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"><span class="keyword">const</span> process = <span class="built_in">require</span>(<span class="string">'process'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> pwd = process.cwd();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 先打包主应用</span></span><br><span class="line">child_process.execSync(<span class="string">'yarn build'</span>, &#123; <span class="attr">stdio</span>: <span class="string">'inherit'</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> apps = <span class="built_in">require</span>(<span class="string">'../config/microApps'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; apps.length; i += <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> app = apps[i];</span><br><span class="line">  <span class="comment">// 子应用项目目录</span></span><br><span class="line">  <span class="keyword">const</span> codePath = app.codePath || app.name;</span><br><span class="line">  <span class="comment">// 打包子应用，然后复制到主应用打包目录下</span></span><br><span class="line">  child_process.execSync(</span><br><span class="line">    <span class="string">`cd ../<span class="subst">$&#123;codePath&#125;</span> &amp;&amp; yarn build &amp;&amp; cp -rf dist <span class="subst">$&#123;pwd&#125;</span>/dist/<span class="subst">$&#123;app.entry&#125;</span>`</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      stdio: <span class="string">'inherit'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打包完成后，将主工程下 <code>dist</code> 文件夹拿去部署下就好</p>
+<h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><ul>
+<li><a href="https://github.com/micro-front-end-demos/main.git" target="_blank" rel="noopener">main</a></li>
+<li><a href="https://github.com/micro-front-end-demos/micro-app-a.git" target="_blank" rel="noopener">micro-app-a</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">umi</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">qiankun</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">微前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/js//" class="article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/12/umi-微前端方案/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-FLEX-vs-Doraemon" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1083,94 +1206,6 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-react-optimized" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/14/react-optimized/">react-optimized</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/14/react-optimized/" class="archive-article-date">
-  	<time datetime="2018-10-14T15:15:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="react-性能优化"><a href="#react-性能优化" class="headerlink" title="react 性能优化"></a>react 性能优化</h1><h2 id="使用-shouldComponentUpdate"><a href="#使用-shouldComponentUpdate" class="headerlink" title="使用 shouldComponentUpdate"></a>使用 <code>shouldComponentUpdate</code></h2><p>react 生命周期<br><img src="/images/react-life-cycle.png" alt="upload successful"></p>
-<p>从 <code>react</code> 的生命周期可以看出，当 <code>component</code> 的 <code>props</code> 和 <code>state</code> 改变时，会调用 <code>shouldComponentUpdate</code> 确认要不要刷新。默认 <code>shouldComponentUpdate</code> 都是返回 <code>true</code> ，这样 <code>component</code> 就会 <code>re-render</code> 。我们可以重写 <code>shouldComponentUpdate</code> , 使之只在特定情况返回 <code>true</code> ，其他情况返回 <code>false</code> ，来避免不必要的 <code>re-render</code> 。<br>
-        
-          <a class="article-more-a" href="/2018/10/14/react-optimized/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Javascript//" class="article-tag-list-link color1">Javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/14/react-optimized/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1185,7 +1220,7 @@ ga('send', 'pageview');
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 Ashoka
+    		&copy; 2021 Ashoka
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1377,6 +1412,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">hackintosh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">qiankun</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微前端</a>
               </li>
             
             <div class="clearfix"></div>
