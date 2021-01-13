@@ -174,6 +174,90 @@ ga('send', 'pageview');
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-等待异步block完成再返回" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/08/等待异步block完成再返回/">等待异步block完成再返回</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/08/等待异步block完成再返回/" class="archive-article-date">
+  	<time datetime="2018-03-08T14:42:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSArray</span> *)tasksForKeyPath:(<span class="built_in">NSString</span> *)keyPath &#123;</span><br><span class="line">    __block <span class="built_in">NSArray</span> *tasks = <span class="literal">nil</span>;</span><br><span class="line">    dispatch_semaphore_t semaphore = dispatch_semaphore_create(<span class="number">0</span>);</span><br><span class="line">    [<span class="keyword">self</span>.session getTasksWithCompletionHandler:^(<span class="built_in">NSArray</span> *dataTasks, <span class="built_in">NSArray</span> *uploadTasks, <span class="built_in">NSArray</span> *downloadTasks) &#123;</span><br><span class="line">        <span class="keyword">if</span> ([keyPath isEqualToString:<span class="built_in">NSStringFromSelector</span>(<span class="keyword">@selector</span>(dataTasks))]) &#123;</span><br><span class="line">            tasks = dataTasks;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([keyPath isEqualToString:<span class="built_in">NSStringFromSelector</span>(<span class="keyword">@selector</span>(uploadTasks))]) &#123;</span><br><span class="line">            tasks = uploadTasks;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([keyPath isEqualToString:<span class="built_in">NSStringFromSelector</span>(<span class="keyword">@selector</span>(downloadTasks))]) &#123;</span><br><span class="line">            tasks = downloadTasks;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([keyPath isEqualToString:<span class="built_in">NSStringFromSelector</span>(<span class="keyword">@selector</span>(tasks))]) &#123;</span><br><span class="line">            tasks = [@[dataTasks, uploadTasks, downloadTasks] valueForKeyPath:<span class="string">@"@unionOfArrays.self"</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        dispatch_semaphore_signal(semaphore);</span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line">    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tasks;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GCD</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/iOS//" class="article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/08/等待异步block完成再返回/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-property-introduce" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -995,90 +1079,6 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-code-push-热更新" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/12/code-push-热更新/">code push 热更新</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/12/code-push-热更新/" class="archive-article-date">
-  	<time datetime="2017-12-12T10:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装-code-push-cli"><a href="#安装-code-push-cli" class="headerlink" title="安装 code-push-cli"></a>安装 <em>code-push-cli</em></h2><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g code-<span class="keyword">push</span>-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
-<h2 id="注册-code-push-账号"><a href="#注册-code-push-账号" class="headerlink" title="注册 code-push 账号"></a>注册 <em>code-push</em> 账号</h2><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">code</span>-<span class="keyword">push</span> register</span><br></pre></td></tr></table></figure>
-<p>会打开一个网页，让你用microsoft 或 github 账号注册，<br>注册完会出现一个token，把该token粘贴到终端</p>
-<h2 id="登录-code-push"><a href="#登录-code-push" class="headerlink" title="登录 code-push"></a>登录 code-push</h2><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">code</span>-<span class="keyword">push</span> login</span><br></pre></td></tr></table></figure>
-<p>会打开一个网页，让你登录，<br>登录完会出现一个token，把该token粘贴到终端</p>
-        
-          <a class="article-more-a" href="/2017/12/12/code-push-热更新/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">react-native</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code-push</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/12/code-push-热更新/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1188,6 +1188,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">crypto</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">objective c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -1196,11 +1204,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">crypto</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">objective c</a>
+                <a href="javascript:void(0)" class="js-tag color1">debug</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1224,19 +1228,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cordova</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ios</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">cordova</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ios</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1260,31 +1264,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssr</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">umi</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">eggjs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">core animation</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">de bu g</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">debug</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">hackintosh</a>
+                <a href="javascript:void(0)" class="js-tag color4">umi</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1293,6 +1277,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">微前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">eggjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">hackintosh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">xcode</a>
               </li>
             
             <div class="clearfix"></div>

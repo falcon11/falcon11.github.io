@@ -215,7 +215,7 @@ ga('send', 'pageview');
 <p>2.<strong>.umirc.ts</strong>配置</p>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">'umi'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> apps = <span class="built_in">require</span>(<span class="string">'./config/microApps'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineConfig(&#123;</span><br><span class="line">  nodeModulesTransform: &#123;</span><br><span class="line">    <span class="keyword">type</span>: <span class="string">'none'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/'</span>,</span><br><span class="line">      component: <span class="string">'@/pages/index'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; path: <span class="string">'/micro-app-a'</span>, microApp: <span class="string">'micro-app-a'</span> &#125;, <span class="comment">// 子应用路由</span></span><br><span class="line">  ],</span><br><span class="line">  history: &#123;</span><br><span class="line">    <span class="keyword">type</span>: <span class="string">'browser'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  qiankun: &#123;</span><br><span class="line">    master: &#123;</span><br><span class="line">      apps,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>3.在 pages 下创建 <code>micro-app-a</code> 页面，<code>micro-app-a/index.tsx</code> 内容如下</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; MicroApp &#125; <span class="keyword">from</span> <span class="string">'umi'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="comment">// name 是 config/microApps.js 里配置的</span></span><br><span class="line">  <span class="keyword">return</span> &lt;MicroApp name="micro-app-a" /&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; MicroApp &#125; <span class="keyword">from</span> <span class="string">'umi'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="comment">// name 是 config/microApps.js 里配置的</span></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">MicroApp</span> <span class="attr">name</span>=<span class="string">"micro-app-a"</span> /&gt;</span>;</span></span><br><span class="line"><span class="xml">&#125;;</span></span><br></pre></td></tr></table></figure>
 <p>4.主应用跳转子应用</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./index.less'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; history &#125; <span class="keyword">from</span> <span class="string">'umi'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1 className=&#123;styles.title&#125;&gt;Page index&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">      &lt;button</span></span><br><span class="line"><span class="regexp">        onClick=&#123;() =&gt; &#123;</span></span><br><span class="line"><span class="regexp">          history.push('/mi</span>cro-app-a<span class="string">');</span></span><br><span class="line"><span class="string">        &#125;&#125;</span></span><br><span class="line"><span class="string">      &gt;</span></span><br><span class="line"><span class="string">        push micro-app-a</span></span><br><span class="line"><span class="string">      &lt;/button&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  );</span></span><br><span class="line"><span class="string">&#125;;</span></span><br></pre></td></tr></table></figure>
 <h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>此时分别运行 <code>yarn start</code> 启动主应用和子应用就可以从主应用跳转子应用</p>
@@ -353,6 +353,15 @@ ga('send', 'pageview');
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/01/13/Failed-to-compile-bundle-var-folders-armv7-xar/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Failed to compile bundle: /var/folders/....armv7.xar
+        
+      </div>
+    </a>
   
   
     <a href="/2020/12/09/FLEX-vs-Doraemon/" id="article-nav-older" class="article-nav-link-wrap">
@@ -514,6 +523,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">crypto</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">objective c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -522,11 +539,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">crypto</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">objective c</a>
+                <a href="javascript:void(0)" class="js-tag color1">debug</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -550,19 +563,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cordova</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ios</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">cordova</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ios</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -586,31 +599,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssr</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">umi</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">eggjs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">core animation</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">de bu g</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">debug</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">hackintosh</a>
+                <a href="javascript:void(0)" class="js-tag color4">umi</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,6 +612,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">微前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">eggjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">hackintosh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">xcode</a>
               </li>
             
             <div class="clearfix"></div>

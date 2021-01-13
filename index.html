@@ -174,6 +174,106 @@ ga('send', 'pageview');
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Failed-to-compile-bundle-var-folders-armv7-xar" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/13/Failed-to-compile-bundle-var-folders-armv7-xar/">Failed to compile bundle: /var/folders/....armv7.xar</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/13/Failed-to-compile-bundle-var-folders-armv7-xar/" class="archive-article-date">
+  	<time datetime="2021-01-13T09:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在公司一台机器上打包项目时出现下面这个报错：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Failed to compile bundle: /var/folders/....armv7.xar</span><br><span class="line"><span class="keyword">error: </span>Unknown attribute kind (62) (Producer: 'APPLE_1_1200.0.32.27_0' Reader: 'LLVM APPLE_1_1103.0.32.59_0')</span><br></pre></td></tr></table></figure></p>
+<p>而我自己本地打包没问题。</p>
+<p>公司机器环境：</p>
+<pre><code>ruby: 2.6
+Xcode11
+</code></pre><p>自己机器环境：  </p>
+<pre><code>ruby: 2.7
+Xcode12
+</code></pre><p>搜索了一下，发现这篇文章说了类似问题：<a href="https://blog.embrace.io/ios-bug-bitcode/" target="_blank" rel="noopener">https://blog.embrace.io/ios-bug-bitcode/</a></p>
+<p>大概原因就是：不同版本 Xcode 的 LLVM 可能不同，而低版本的 LLVM 无法读取 高版本 LLVM 编译出来的东西。（项目用到的一个静态库是用Xcode12编译的）</p>
+<p>解决思路两个：  </p>
+<ol>
+<li>升级公司机器的 Xcode</li>
+<li>用 Xcode11 重新编译编译用到的静态库</li>
+</ol>
+<p>由于公司机器不好更改环境，就用 Xcode11 重新编译静态库，再重新导入项目，最后项目在 Xcode11 也能正常编译。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">xcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/iOS//" class="article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/13/Failed-to-compile-bundle-var-folders-armv7-xar/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-umi-微前端方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -834,11 +934,11 @@ ga('send', 'pageview');
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssr</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">umi</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">umi</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssr</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1081,107 +1181,6 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-Chrome-shortcuts" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/27/Chrome-shortcuts/">Chrome-shortcuts</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/27/Chrome-shortcuts/" class="archive-article-date">
-  	<time datetime="2018-12-27T03:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Chrome-常用快捷键"><a href="#Chrome-常用快捷键" class="headerlink" title="Chrome 常用快捷键"></a>Chrome 常用快捷键</h2><ul>
-<li>打开最近关闭tab: <code>Command-Shift-T</code></li>
-<li>跳到指定tab: <code>Command-[1-9]</code></li>
-<li>切换到上一个、下一个tab: <code>Ctrl-Tab</code>(下一个)、<code>Ctrl-Shift-Tab</code>(上一个)</li>
-<li>关闭tab、window: <code>Command-W</code>(Tab) <code>Command-Shift-W</code>(window)</li>
-<li>在新tab打开链接: <code>Command-Shift-click</code>(在新tab打开链接并切换过去) <code>Command-click</code>(在新tab打开链接不切换过去)</li>
-<li>在新window打开链接: <code>Shift-click</code></li>
-<li>打开新window: <code>Command-N</code> <code>Command-Shift-N</code>(隐私模式)</li>
-<li>向下、向上滚：<code>空格</code>(向下) <code>Shift+空格</code>(向上)</li>
-<li>滚到顶部、底部: <code>Command-上箭头</code>  <code>Command+下箭头</code></li>
-<li>停止刷新、重载: <code>Escape</code>  <code>Command-R</code></li>
-<li>跳到地址栏: <code>Command-L</code></li>
-<li>重置缩放: <code>Command-0</code></li>
-<li>将当前网页添加到书签: <code>Command-D</code></li>
-<li>打开设置: <code>Command-</code>,</li>
-<li>查看所有下载: <code>Command-Shift-J</code></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">chrome</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/software//" class="article-tag-list-link color4">software</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/27/Chrome-shortcuts/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1291,6 +1290,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">crypto</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">objective c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -1299,11 +1306,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">crypto</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">objective c</a>
+                <a href="javascript:void(0)" class="js-tag color1">debug</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1327,19 +1330,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cordova</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ios</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">cordova</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ios</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1363,31 +1366,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssr</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">umi</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">eggjs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">core animation</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">de bu g</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">debug</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">hackintosh</a>
+                <a href="javascript:void(0)" class="js-tag color4">umi</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1396,6 +1379,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">微前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">eggjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">hackintosh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">xcode</a>
               </li>
             
             <div class="clearfix"></div>
