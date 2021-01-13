@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://jashoka.com">
   <title>umi 微前端方案 | The Catcher in the Rye</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="umi 的微前端方案是 qiankun。本文通过举例介绍 umi 中怎么用 qiankun 搭建主应用和子应用。 创建主应用1.新建主工程 123mkdir main &amp;amp;&amp;amp; cd mainyarn create @umijs/umi-appyarn 2.安装 qiankun 插件 1yarn add @umijs/plugin-qiankun -D 创建子应用回到主工程同级目录 1">
+  <meta name="description" content="umi 的微前端方案是 qiankun。本文通过举例介绍 umi 中怎么用 qiankun 搭建主应用和子应用。 创建主应用1.新建主工程 123mkdir main &amp;amp;&amp;amp; cd mainyarn create @umijs/umi-appyarn 2.安装 qiankun 插件 1yarn add @umijs/plugin-qiankun -D">
 <meta name="keywords" content="umi,qiankun,微前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="umi 微前端方案">
 <meta property="og:url" content="http://jashoka.com/2021/01/12/umi-微前端方案/index.html">
 <meta property="og:site_name" content="The Catcher in the Rye">
-<meta property="og:description" content="umi 的微前端方案是 qiankun。本文通过举例介绍 umi 中怎么用 qiankun 搭建主应用和子应用。 创建主应用1.新建主工程 123mkdir main &amp;amp;&amp;amp; cd mainyarn create @umijs/umi-appyarn 2.安装 qiankun 插件 1yarn add @umijs/plugin-qiankun -D 创建子应用回到主工程同级目录 1">
+<meta property="og:description" content="umi 的微前端方案是 qiankun。本文通过举例介绍 umi 中怎么用 qiankun 搭建主应用和子应用。 创建主应用1.新建主工程 123mkdir main &amp;amp;&amp;amp; cd mainyarn create @umijs/umi-appyarn 2.安装 qiankun 插件 1yarn add @umijs/plugin-qiankun -D">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-01-12T10:11:37.391Z">
+<meta property="og:updated_time" content="2021-01-13T01:08:13.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="umi 微前端方案">
-<meta name="twitter:description" content="umi 的微前端方案是 qiankun。本文通过举例介绍 umi 中怎么用 qiankun 搭建主应用和子应用。 创建主应用1.新建主工程 123mkdir main &amp;amp;&amp;amp; cd mainyarn create @umijs/umi-appyarn 2.安装 qiankun 插件 1yarn add @umijs/plugin-qiankun -D 创建子应用回到主工程同级目录 1">
+<meta name="twitter:description" content="umi 的微前端方案是 qiankun。本文通过举例介绍 umi 中怎么用 qiankun 搭建主应用和子应用。 创建主应用1.新建主工程 123mkdir main &amp;amp;&amp;amp; cd mainyarn create @umijs/umi-appyarn 2.安装 qiankun 插件 1yarn add @umijs/plugin-qiankun -D">
   
     <link rel="alternative" href="/atom.xml" title="The Catcher in the Rye" type="application/atom+xml">
   
@@ -199,6 +199,7 @@ ga('send', 'pageview');
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir main &amp;&amp; <span class="built_in">cd</span> main</span><br><span class="line">yarn create @umijs/umi-app</span><br><span class="line">yarn</span><br></pre></td></tr></table></figure>
 <p>2.安装 qiankun 插件</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add @umijs/plugin-qiankun -D</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="创建子应用"><a href="#创建子应用" class="headerlink" title="创建子应用"></a>创建子应用</h2><p>回到主工程同级目录</p>
 <p>1.新建子工程 micro-app-a</p>
   <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir micro-app<span class="_">-a</span> &amp;&amp; <span class="built_in">cd</span> micro-app<span class="_">-a</span></span><br><span class="line">yarn create @umijs/umi-app</span><br><span class="line">yarn</span><br></pre></td></tr></table></figure>
