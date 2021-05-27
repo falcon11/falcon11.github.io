@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://jashoka.com">
-  <title>objc runtime 消息发送 | The Catcher in the Rye</title>
+  <title>Umi 配置版本号 | The Catcher in the Rye</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="objective-c 函数的转换比如有如下一个函数123456789// ASRTTModel.m#import &quot;ASRTTModel.h&quot;#import &amp;lt;objc/message.h&amp;gt;@implementation ASRTTModel+ (void)func1 &amp;#123;    printf(&quot;%s&quot;, __FUNCTION__);&amp;#125;@end 在终端运行下面代码，">
-<meta name="keywords" content="objective c,objc runtime">
+  <meta name="description" content="问题前端发布时经常遇到这种情况：你不知道到底线上版本到底是不是最新的，虽然你把打包文件发给运维了。当然，如果涉及到UI变动很容易判断，但是如果是一些bug修复，不涉及UI，那就比较难判断了。 解决办法这时引入版本号，并且关联上打包时间，并在UI中添加一个地方显示版本信息。">
+<meta name="keywords" content="umi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="objc runtime 消息发送">
-<meta property="og:url" content="http://jashoka.com/2018/01/06/objc-runtime/index.html">
+<meta property="og:title" content="Umi 配置版本号">
+<meta property="og:url" content="http://jashoka.com/2021/05/27/Umi-配置版本号/index.html">
 <meta property="og:site_name" content="The Catcher in the Rye">
-<meta property="og:description" content="objective-c 函数的转换比如有如下一个函数123456789// ASRTTModel.m#import &quot;ASRTTModel.h&quot;#import &amp;lt;objc/message.h&amp;gt;@implementation ASRTTModel+ (void)func1 &amp;#123;    printf(&quot;%s&quot;, __FUNCTION__);&amp;#125;@end 在终端运行下面代码，">
+<meta property="og:description" content="问题前端发布时经常遇到这种情况：你不知道到底线上版本到底是不是最新的，虽然你把打包文件发给运维了。当然，如果涉及到UI变动很容易判断，但是如果是一些bug修复，不涉及UI，那就比较难判断了。 解决办法这时引入版本号，并且关联上打包时间，并在UI中添加一个地方显示版本信息。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-10T14:13:33.865Z">
+<meta property="og:updated_time" content="2021-05-27T08:39:16.474Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="objc runtime 消息发送">
-<meta name="twitter:description" content="objective-c 函数的转换比如有如下一个函数123456789// ASRTTModel.m#import &quot;ASRTTModel.h&quot;#import &amp;lt;objc/message.h&amp;gt;@implementation ASRTTModel+ (void)func1 &amp;#123;    printf(&quot;%s&quot;, __FUNCTION__);&amp;#125;@end 在终端运行下面代码，">
+<meta name="twitter:title" content="Umi 配置版本号">
+<meta name="twitter:description" content="问题前端发布时经常遇到这种情况：你不知道到底线上版本到底是不是最新的，虽然你把打包文件发给运维了。当然，如果涉及到UI变动很容易判断，但是如果是一些bug修复，不涉及UI，那就比较难判断了。 解决办法这时引入版本号，并且关联上打包时间，并在UI中添加一个地方显示版本信息。">
   
     <link rel="alternative" href="/atom.xml" title="The Catcher in the Rye" type="application/atom+xml">
   
@@ -174,69 +174,32 @@ ga('send', 'pageview');
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-objc-runtime" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Umi-配置版本号" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      objc runtime 消息发送
+      Umi 配置版本号
     </h1>
   
 
         
-        <a href="/2018/01/06/objc-runtime/" class="archive-article-date">
-  	<time datetime="2018-01-06T14:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-06</time>
+        <a href="/2021/05/27/Umi-配置版本号/" class="archive-article-date">
+  	<time datetime="2021-05-27T08:38:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="objective-c-函数的转换"><a href="#objective-c-函数的转换" class="headerlink" title="objective-c 函数的转换"></a>objective-c 函数的转换</h3><p>比如有如下一个函数<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ASRTTModel.m</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"ASRTTModel.h"</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;objc/message.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ASRTTModel</span></span></span><br><span class="line">+ (<span class="keyword">void</span>)func1 &#123;</span><br><span class="line">    printf(<span class="string">"%s"</span>, __FUNCTION__);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
-<p>在终端运行下面代码，会生成一个ASRTTModel.cpp文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clang -rewrite-objc ASRTTModel.m</span><br></pre></td></tr></table></figure></p>
-<p>在该文件中，我们会发现上面方法被转换成c函数实现<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这是 func1 的IMP</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> _C_ASRTTModel_func1(Class <span class="keyword">self</span>, SEL _cmd) &#123;</span><br><span class="line">    printf(<span class="string">"%s"</span>, __FUNCTION__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>前端发布时经常遇到这种情况：你不知道到底线上版本到底是不是最新的，虽然你把打包文件发给运维了。<br>当然，如果涉及到UI变动很容易判断，但是如果是一些bug修复，不涉及UI，那就比较难判断了。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>这时引入版本号，并且关联上打包时间，并在UI中添加一个地方显示版本信息。</p>
 <a id="more"></a>
-<p>看下IMP的定义<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 函数指针, 用于表示对象方法的实现</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">id</span> (*IMP)(<span class="keyword">id</span>, SEL, ...);</span><br></pre></td></tr></table></figure></p>
-<h3 id="objective-c-消息的转换"><a href="#objective-c-消息的转换" class="headerlink" title="objective-c 消息的转换"></a>objective-c 消息的转换</h3><p>如下，我们再添加一个函数调用func1<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)func4 &#123;</span><br><span class="line">    [<span class="keyword">self</span> func1];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在终端运行<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clang -rewrite-objc ASRTTModel.m</span><br></pre></td></tr></table></figure></p>
-<p>我们会发现，该调用被转换成<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> _I_ASRTTModel_func4(ASRTTModel * <span class="keyword">self</span>, SEL _cmd) &#123;</span><br><span class="line">    ((<span class="keyword">void</span> (*)(<span class="keyword">id</span>, SEL))(<span class="keyword">void</span> *)objc_msgSend)((<span class="keyword">id</span>)<span class="keyword">self</span>, sel_registerName(<span class="string">"func1"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>可以看到objective-c的消息被转换成<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// @selector("func1") 和 sel_registerName("func1") 等价</span></span><br><span class="line">objc_msgSend(<span class="keyword">self</span>, <span class="keyword">@selector</span>(<span class="string">"func1"</span>))</span><br></pre></td></tr></table></figure></p>
-<p>objc_msgSend的定义：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///**</span></span><br><span class="line"> Sends a message with a simple <span class="keyword">return</span> value to an instance of a <span class="keyword">class</span>.</span><br><span class="line"></span><br><span class="line"> @param <span class="keyword">self</span> A pointer that points to the instance of the <span class="keyword">class</span> that is to receive the message</span><br><span class="line"> @param op The selector of the method that handles the message.</span><br><span class="line"> @param ... A variable argument list containing the arguments to the method.</span><br><span class="line"> </span><br><span class="line"> @return The <span class="keyword">return</span> value of the method.</span><br><span class="line"> */</span><br><span class="line"><span class="keyword">id</span> objc_msgSend(<span class="keyword">id</span> <span class="keyword">self</span>, SEL op, ...);</span><br></pre></td></tr></table></figure></p>
-<p>在了解objc_msgSend之前，我们先了解下SEL<br>SEL是选择器，一个不透明结构体。实际上 <code>SEL sel_registerName(const char *str)</code> 里的实现返回的是一个字符串(char *)，该字符串其实就是从objective-c角度看的方法名称，在runtime内部，每个class有一个cache，里面存着该class已经映射的SEL-&gt;IMP对（IMP其实就是指向上面转换生成的c函数的指针）。要往class添加新的SEL-&gt;IMP映射可以用如下方法<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> class_addMethod(Class cls, SEL name, IMP imp, <span class="keyword">const</span> <span class="keyword">char</span> *types)</span><br></pre></td></tr></table></figure></p>
-<p><code>sel_registerName</code> 里还维护了一个表，记录着所有已注册过的选择器。</p>
-<p>这样 <code>objc_msgSend</code> 作用就很清晰了：在self对应class及super class中寻找op这个SEL对应的IMP，如果找到就调用该IMP并返回返回值，如果找不到会调用 <code>_objc_msgForward（和IMP类型一样）</code> 消息转发，这个后面再说。<br>objc_msgSend实现有用到汇编，这里贴上<a href="https://blog.ibireme.com/2013/11/26/objective-c-messaging/" target="_blank" rel="noopener">别人</a>写的伪代码<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> objc_msgSend(<span class="keyword">id</span> <span class="keyword">self</span>, SEL op, ...) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">self</span>) <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">	IMP imp = class_getMethodImplementation(<span class="keyword">self</span>-&gt;isa, SEL op);</span><br><span class="line">	imp(<span class="keyword">self</span>, op, ...); <span class="comment">//调用这个函数，伪代码...</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//查找IMP</span></span><br><span class="line">IMP class_getMethodImplementation(Class cls, SEL sel) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!cls || !sel) <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    IMP imp = lookUpImpOrNil(cls, sel);</span><br><span class="line">    <span class="keyword">if</span> (!imp) <span class="keyword">return</span> _objc_msgForward; <span class="comment">//这个是用于消息转发的</span></span><br><span class="line">    <span class="keyword">return</span> imp;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">IMP lookUpImpOrNil(Class cls, SEL sel) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!cls-&gt;initialize()) &#123;</span><br><span class="line">        _class_initialize(cls);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    Class curClass = cls;</span><br><span class="line">    IMP imp = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">do</span> &#123; <span class="comment">//先查缓存,缓存没有时重建,仍旧没有则向父类查询</span></span><br><span class="line">        <span class="keyword">if</span> (!curClass) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> (!curClass-&gt;cache) fill_cache(cls, curClass);</span><br><span class="line">        imp = cache_getImp(curClass, sel);</span><br><span class="line">        <span class="keyword">if</span> (imp) <span class="keyword">break</span>;</span><br><span class="line">    &#125; <span class="keyword">while</span> (curClass = curClass-&gt;superclass);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> imp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><code>_objc_msgForward</code> 消息转发的目的是把selector转发给能响应该selector的对象。这过程会依次执行以下方法（并不一定都执行一遍）</p>
-<ol>
-<li><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">BOOL</span>)resolveInstanceMethod:(SEL)sel</span><br><span class="line">or</span><br><span class="line">+ (<span class="built_in">BOOL</span>)resolveClassMethod:(SEL)sel</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>我们可以在该方法里动态为该SEL添加IMP映射（使用 class_addMethod），然后返回YES，这样会再次运行一遍 <code>class_getMethodImplementation</code> 流程，找到相应的IMP并调用,并且不会再执行下面所有函数。 如果找到的还是 <code>_objc_msgForward</code>，那么就会执行下面函数。如果返回NO也会执行下面函数。<br>2.<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)forwardingTargetForSelector:(SEL)aSelector</span><br></pre></td></tr></table></figure></p>
-<p>在这个方法里我们可以返回一个能响应该aSelector的target，相当于执行了 <code>objc_msgSend(newTarget, aSelector)</code> ，下面方法不会继续执行。返回nil，继续执行下面方法。一般来说最好在这步就处理掉，因为在第4个函数处理掉会花更多的时间。<br>3.<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSMethodSignature</span> *)methodSignatureForSelector:(SEL)aSelector</span><br></pre></td></tr></table></figure></p>
-<p>在这个方法里我们可以为aSelector创建一个方法签名并返回，所谓签名就是用字符串对aSelector的IMP一些调用信息（返回值和参数）进行描述，比如：”v@:”，‘v’该IMP没有返回值，‘@’表示第一个参数为object，‘:’表示第二个参数为SEL，具体对应表可参考该<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html#//apple_ref/doc/uid/TP40008048-CH100" target="_blank" rel="noopener">文档</a>。如果返回nil，runtime system 会直接调用第5个方法，抛出 <code>unrecognized selector sent to instance</code> 异常。</p>
-<p>4.<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)forwardInvocation:(<span class="built_in">NSInvocation</span> *)anInvocation</span><br></pre></td></tr></table></figure></p>
-<p>anInvocation是用第3步的签名和一些该调用相关信息（SEL、返回值、参数）构造的NSInvocation对象。我们可以把该对象转发给其他可响应该SEL的对象调用。比如<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)forwardInvocation:(<span class="built_in">NSInvocation</span> *)invocation</span><br><span class="line">&#123;</span><br><span class="line">    SEL aSelector = [invocation selector];</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> ([friend respondsToSelector:aSelector])</span><br><span class="line">        [invocation invokeWithTarget:friend];</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        [<span class="keyword">super</span> forwardInvocation:invocation];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>5.<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)doesNotRecognizeSelector:(SEL)aSelector</span><br></pre></td></tr></table></figure></p>
-<p>该函数默认会抛出 <code>unrecognized selector sent to instance</code> 异常。如果重写该函数，并直接return掉，则即使是错误的调用也不会报错。</p>
-<h3 id="打印运行时发送的消息"><a href="#打印运行时发送的消息" class="headerlink" title="打印运行时发送的消息"></a>打印运行时发送的消息</h3><p>有两种方式：</p>
-<ol>
-<li><p>在代码中添加以下代码</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">void</span> instrumentObjcMessageSends(<span class="built_in">BOOL</span>);</span><br><span class="line">(<span class="keyword">void</span>)instrumentObjcMessageSends(<span class="literal">YES</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>断点暂停程序运行，并在在xcode控制台输入下面的命令：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call (<span class="keyword">void</span>)instrumentObjcMessageSends(<span class="literal">YES</span>)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>所以的打印都在/tmp/msgSend-xxxx</p>
-<h3 id="为一个类动态添加方法"><a href="#为一个类动态添加方法" class="headerlink" title="为一个类动态添加方法"></a>为一个类动态添加方法</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  ViewController.m</span></span><br><span class="line"></span><br><span class="line">+ (<span class="keyword">void</span>)dynamicAddMethod &#123;</span><br><span class="line">    <span class="comment">// 给该SEL取名myPrint</span></span><br><span class="line">    SEL sel = <span class="keyword">@selector</span>(myPrint);</span><br><span class="line">    <span class="comment">// class_addMethod 可以重写父类方法.</span></span><br><span class="line">    <span class="comment">// sel为方法名，(IMP)printSomething为对应的实现</span></span><br><span class="line">    <span class="comment">// "v@:"返回值、参数信息: Since the function must take at least two arguments—self and _cmd, the second and third characters must be “@:” (the first character is the return type).</span></span><br><span class="line">    class_addMethod(<span class="keyword">self</span>, sel, (IMP)printSomething, <span class="string">"v@:@"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// IMP</span></span><br><span class="line"><span class="keyword">void</span> printSomething(<span class="keyword">id</span> <span class="keyword">self</span>, SEL _cmd, <span class="keyword">id</span> text)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%s %s:动态添加的方法"</span>, __FUNCTION__, _cmd);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, text);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidAppear:(<span class="built_in">BOOL</span>)animated &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidAppear:animated];</span><br><span class="line">    <span class="comment">/// 调用myPrint方法</span></span><br><span class="line">    [<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(myPrint)];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">+ (<span class="built_in">BOOL</span>)resolveInstanceMethod:(SEL)sel &#123;</span><br><span class="line">    <span class="built_in">BOOL</span> rslt = [<span class="keyword">super</span> resolveInstanceMethod:sel];</span><br><span class="line">    <span class="keyword">if</span> (sel == <span class="keyword">@selector</span>(myPrint)) &#123;</span><br><span class="line">        <span class="comment">/// 为该类添加myPrint方法</span></span><br><span class="line">        [<span class="keyword">self</span> dynamicAddMethod];</span><br><span class="line">        rslt = <span class="literal">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rslt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>打印<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">- RunTimeDemoViewController <span class="built_in">NSObject</span> performSelector:withObject:</span><br><span class="line">+ RunTimeDemoViewController RunTimeDemoViewController resolveInstanceMethod:</span><br><span class="line">+ RunTimeDemoViewController RunTimeDemoViewController resolveInstanceMethod:</span><br><span class="line">+ <span class="built_in">UIViewController</span> <span class="built_in">NSObject</span> resolveInstanceMethod:</span><br><span class="line">+ RunTimeDemoViewController RunTimeDemoViewController dynamicAddMethod</span><br><span class="line">- RunTimeDemoViewController RunTimeDemoViewController myPrint</span><br><span class="line">- RunTimeDemoViewController RunTimeDemoViewController myPrint</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>以上就是我这两天看网上博客和自己实验得出的一些心得</p>
-<p>ps:</p>
-<ul>
-<li><a href="https://blog.ibireme.com/2013/11/26/objective-c-messaging/" target="_blank" rel="noopener">Objective-C 中的消息与消息转发</a></li>
-<li><a href="https://www.jianshu.com/p/20655f394736" target="_blank" rel="noopener">招聘一个靠谱的 iOS</a></li>
-</ul>
+<h2 id="在-umi-中实现该需求"><a href="#在-umi-中实现该需求" class="headerlink" title="在 umi 中实现该需求"></a>在 <code>umi</code> 中实现该需求</h2><p><code>config.ts</code>文件配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">  define: &#123;</span><br><span class="line">    VER_CODE: <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(), <span class="comment">// 用时间戳表示版本号</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>代码中这样使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Page = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;p&gt;版本号:&#123;VER_CODE&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">  )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>这样编译时，<code>VER_CODE</code> 会被替换成响应的时间戳</p>
 
       
 
@@ -276,28 +239,13 @@ ga('send', 'pageview');
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">objective c</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">objc runtime</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">umi</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ios//" class="article-tag-list-link color4">ios</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -347,7 +295,7 @@ ga('send', 'pageview');
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://jashoka.com/2018/01/06/objc-runtime/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://jashoka.com/2021/05/27/Umi-配置版本号/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -361,18 +309,9 @@ ga('send', 'pageview');
   
 <nav id="article-nav">
   
-    <a href="/2018/01/10/UITableView 性能优化/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          UITableView 性能优化
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/12/22/redux/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">redux</div>
+    <a href="/2021/01/13/Failed-to-compile-bundle-var-folders-armv7-xar/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Failed to compile bundle: /var/folders/....armv7.xar</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -410,9 +349,9 @@ ga('send', 'pageview');
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'jashoka'; // required: replace example with your forum shortname
         var disqus_config = function () {
-        this.page.url = 'http://jashoka.com/2018/01/06/objc-runtime/';
-        this.page.identifier = '/2018/01/06/objc-runtime/';
-        this.page.title = 'objc runtime 消息发送';
+        this.page.url = 'http://jashoka.com/2021/05/27/Umi-配置版本号/';
+        this.page.identifier = '/2021/05/27/Umi-配置版本号/';
+        this.page.title = 'Umi 配置版本号';
         };
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
