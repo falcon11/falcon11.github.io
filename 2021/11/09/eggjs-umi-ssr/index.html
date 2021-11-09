@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="The Catcher in the Rye">
 <meta property="og:description" content="之前写过一篇类似文章，本篇为重写  本篇教程讲 eggjs 怎么配合 umi 开启 ssr(服务端渲染)。 一、 创建 eggjs 工程123456789# 创建项目目录mkdir ssr-with-eggjs &amp;amp;&amp;amp; cd ssr-with-eggjs# 初始化 eggjs 项目npm init egg --type=simple# 安装依赖yarn# 启动项目，测试下有没问题y">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-11-09T11:26:33.546Z">
+<meta property="og:updated_time" content="2021-11-09T11:47:17.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="eggjs + umi + ssr(新)">
 <meta name="twitter:description" content="之前写过一篇类似文章，本篇为重写  本篇教程讲 eggjs 怎么配合 umi 开启 ssr(服务端渲染)。 一、 创建 eggjs 工程123456789# 创建项目目录mkdir ssr-with-eggjs &amp;amp;&amp;amp; cd ssr-with-eggjs# 初始化 eggjs 项目npm init egg --type=simple# 安装依赖yarn# 启动项目，测试下有没问题y">
@@ -204,7 +204,7 @@ ga('send', 'pageview');
 <h2 id="三、修改-umi-工程配置"><a href="#三、修改-umi-工程配置" class="headerlink" title="三、修改 umi 工程配置"></a>三、修改 <code>umi</code> 工程配置</h2><p><code>.umirc.ts</code> 文件新增如下配置</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">'umi'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineConfig(&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// 目前开启 dynamicImport 和 ssr，服务端渲染资源文件路径有问题</span></span><br><span class="line">  <span class="comment">// dynamicImport: &#123;&#125;,</span></span><br><span class="line">  ssr: &#123;</span><br><span class="line">    <span class="comment">// dev 模式 服务端渲染交给 eggjs 处理</span></span><br><span class="line">    devServerRender: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  hash: <span class="literal">true</span>,</span><br><span class="line">  outputPath: <span class="string">'../public'</span>,</span><br><span class="line">  manifest: &#123;</span><br><span class="line">    fileName: <span class="string">'../../config/manifest.json'</span>,</span><br><span class="line">    publicPath: <span class="string">''</span>,</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>修改项目根目录 <code>.gitignore</code> 文件，添加如下内容</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># umi</span></span><br><span class="line">app/<span class="keyword">public</span></span><br><span class="line"><span class="built_in">config</span>/manifest.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># umi</span></span><br><span class="line">app/public</span><br><span class="line">config/manifest.json</span><br></pre></td></tr></table></figure>
 <p>启动 <code>umi</code> 项目看有没问题</p>
 <h2 id="四、修改-eggjs-项目"><a href="#四、修改-eggjs-项目" class="headerlink" title="四、修改 eggjs 项目"></a>四、修改 <code>eggjs</code> 项目</h2><p>安装 <code>egg-view-assets</code> 和 <code>egg-view-nunjucks</code></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add egg-view-assets egg-view-nunjucks</span><br></pre></td></tr></table></figure>
@@ -223,7 +223,7 @@ ga('send', 'pageview');
 <p>修改 <code>app/controller/home.js</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Controller = <span class="built_in">require</span>(<span class="string">'egg'</span>).Controller;</span><br><span class="line"><span class="keyword">const</span> mime = <span class="built_in">require</span>(<span class="string">'mime'</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HomeController</span> <span class="keyword">extends</span> <span class="title">Controller</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(ctx) &#123;</span><br><span class="line">    <span class="keyword">super</span>(ctx);</span><br><span class="line">    <span class="keyword">this</span>.serverRender = <span class="built_in">require</span>(<span class="string">'../public/umi.server'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">async</span> index() &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; ctx &#125; = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 先走 eggjs 的 view 渲染</span></span><br><span class="line">    <span class="keyword">const</span> htmlTemplate = <span class="keyword">await</span> ctx.view.render(<span class="string">'index.html'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将 html 模板传到服务端渲染函数中</span></span><br><span class="line">    <span class="keyword">const</span> &#123; html, error &#125; = <span class="keyword">await</span> <span class="keyword">this</span>.serverRender(&#123;</span><br><span class="line">      path: ctx.url,</span><br><span class="line">      getInitialPropsCtx: &#123;&#125;,</span><br><span class="line">      htmlTemplate,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">      ctx.logger.error(</span><br><span class="line">        <span class="string">'[SSR ERROR] 渲染报错，切换至客户端渲染'</span>,</span><br><span class="line">        error,</span><br><span class="line">        ctx.url</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    ctx.type = mime.getType(ctx.url);</span><br><span class="line">    ctx.status = <span class="number">200</span>;</span><br><span class="line">    ctx.body = html;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = HomeController;</span><br></pre></td></tr></table></figure>
 <p>创建 <code>app/web/.env</code>，添加如下环境变量</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># build 时不生成 html</span></span><br><span class="line"><span class="attr">HTML</span>=none</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># build 时不生成 html</span></span><br><span class="line">HTML=none</span><br></pre></td></tr></table></figure>
 <p><code>eggjs</code> 项目安装 <code>cross-env</code></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add cross-env</span><br></pre></td></tr></table></figure>
 <p>在根目录的 <code>package.json</code> 添加如下配置</p>
@@ -512,6 +512,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">chrome</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ssr</a>
               </li>
              
@@ -524,23 +528,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">crypto</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">url-scheme</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">universal links</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">chrome</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">crypto</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">debug</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -552,10 +548,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">xcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">objective c</a>
               </li>
              
@@ -564,11 +556,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+                <a href="javascript:void(0)" class="js-tag color1">xcode</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">arc</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -588,11 +580,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">arc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,14 +604,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">react-redux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">qiankun</a>
               </li>
              
@@ -624,11 +612,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">react-redux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">core animation</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">hackintosh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">debug</a>
               </li>
             
             <div class="clearfix"></div>
