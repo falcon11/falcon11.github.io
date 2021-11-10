@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="The Catcher in the Rye">
 <meta property="og:description" content="之前写过一篇类似文章，本篇为重写  本篇教程讲 eggjs 怎么配合 umi 开启 ssr(服务端渲染)。 一、 创建 eggjs 工程123456789# 创建项目目录mkdir ssr-with-eggjs &amp;amp;&amp;amp; cd ssr-with-eggjs# 初始化 eggjs 项目npm init egg --type=simple# 安装依赖yarn# 启动项目，测试下有没问题y">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-11-09T11:47:17.511Z">
+<meta property="og:updated_time" content="2021-11-10T07:41:57.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="eggjs + umi + ssr(新)">
 <meta name="twitter:description" content="之前写过一篇类似文章，本篇为重写  本篇教程讲 eggjs 怎么配合 umi 开启 ssr(服务端渲染)。 一、 创建 eggjs 工程123456789# 创建项目目录mkdir ssr-with-eggjs &amp;amp;&amp;amp; cd ssr-with-eggjs# 初始化 eggjs 项目npm init egg --type=simple# 安装依赖yarn# 启动项目，测试下有没问题y">
@@ -236,6 +236,18 @@ ga('send', 'pageview');
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn stop</span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上是根据 <code>umi</code> 官方 srr + egg 总结出来的主要步骤。不过要注意，目前 <code>umi</code> 工程配置 <strong>不能开启 <code>dynamicImport</code></strong> ，不然服务端渲染时会出错。</p>
 <p><a href="https://github.com/falcon11/ssr-with-eggjs" target="_blank" rel="noopener">项目地址</a></p>
+<h2 id="续"><a href="#续" class="headerlink" title="续"></a>续</h2><p>按上面配置完后，发现 <code>yarn dev</code> 启动后会报 <code>too many open files</code> 错误，看了下报错日志，是 <code>eggjs</code> 把 <code>web</code> 项目的 <code>node_modules</code> 文件夹也加入了 watcher，导致大量文件句柄，目前解决方法是将 web 项目依赖都移到项目根目录。以下是解决步骤</p>
+<p>1、 将 <code>app/web/package.json</code> 中依赖都移到根目录的 <code>package.json</code></p>
+<p>现在根目录 <code>package.json</code> 新增依赖如下:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"@ant-design/pro-layout"</span>: <span class="string">"^6.5.0"</span>,</span><br><span class="line">    <span class="attr">"react"</span>: <span class="string">"17.x"</span>,</span><br><span class="line">    <span class="attr">"react-dom"</span>: <span class="string">"17.x"</span>,</span><br><span class="line">    <span class="attr">"umi"</span>: <span class="string">"^3.5.20"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"@types/react"</span>: <span class="string">"^17.0.0"</span>,</span><br><span class="line">    <span class="attr">"@types/react-dom"</span>: <span class="string">"^17.0.0"</span>,</span><br><span class="line">    <span class="attr">"@umijs/preset-react"</span>: <span class="string">"1.x"</span>,</span><br><span class="line">    <span class="attr">"@umijs/test"</span>: <span class="string">"^3.5.20"</span>,</span><br><span class="line">    <span class="attr">"lint-staged"</span>: <span class="string">"^10.0.7"</span>,</span><br><span class="line">    <span class="attr">"prettier"</span>: <span class="string">"^2.2.0"</span>,</span><br><span class="line">    <span class="attr">"typescript"</span>: <span class="string">"^4.1.2"</span>,</span><br><span class="line">    <span class="attr">"yorkie"</span>: <span class="string">"^2.0.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、 将 <code>app/web/package.json</code> 中脚本移到根目录的 <code>package.json</code>,根目录 <code>package.json</code> 新增如下脚本：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"cross-env APP_ROOT=app/web umi build"</span>,</span><br><span class="line">    <span class="attr">"start-web"</span>: <span class="string">"cross-env APP_ROOT=app/web umi dev"</span>,</span><br><span class="line">    <span class="attr">"postinstall-web"</span>: <span class="string">"cross-env APP_ROOT=app/web umi generate tmp"</span>,</span><br><span class="line">    <span class="attr">"test-web"</span>: <span class="string">"cross-env APP_ROOT=app/web umi-test"</span>,</span><br><span class="line">    <span class="attr">"test:coverage-web"</span>: <span class="string">"cross-env APP_ROOT=app/web umi-test --coverage"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在可以把 <code>app/web/package.json</code> 文件删了</p>
+<p>3、 修改 <code>config/config.default.json</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">assets: &#123;</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    <span class="comment">// 改这一行</span></span><br><span class="line">    command: <span class="string">'umi dev'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>4、 重新安装依赖</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn</span><br></pre></td></tr></table></figure>
+<p>以上就是相关解决方案，现在 <code>yarn dev</code> 启动开发环境，就不会报错了。本来想找找有什么配置，能让 <code>eggjs</code> 直接忽略 <code>node_modules</code>，不过没找到。</p>
 
       
 
@@ -512,10 +524,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">chrome</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ssr</a>
               </li>
              
@@ -528,7 +536,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">debug</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">chrome</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">crypto</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">xcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,6 +557,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">universal links</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -552,15 +576,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">xcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">arc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -572,6 +592,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">cordova</a>
               </li>
              
@@ -580,15 +604,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">arc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -604,14 +620,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">qiankun</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">微前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">redux</a>
               </li>
              
@@ -620,15 +628,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">qiankun</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">core animation</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">hackintosh</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">debug</a>
               </li>
             
             <div class="clearfix"></div>
