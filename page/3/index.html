@@ -174,6 +174,93 @@ ga('send', 'pageview');
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iOS-https防止中间人攻击" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/15/iOS-https防止中间人攻击/">iOS https防止中间人攻击</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/15/iOS-https防止中间人攻击/" class="archive-article-date">
+  	<time datetime="2018-03-14T17:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="“公钥”-和-“私钥”"><a href="#“公钥”-和-“私钥”" class="headerlink" title="“公钥” 和 “私钥”"></a>“公钥” 和 “私钥”</h2><p>首先要明白两个概念“公钥”和“私钥”，<br><strong>“公钥”</strong> 可以理解成锁头，<strong>“私钥”</strong> 就是钥匙。我们可以把 <strong>“公钥”</strong> 给客户端用来加密数据，当数据传回来时再用私钥解开加密就可以看到真正的内容了。<br>https数字证书：里面包含公钥，一般签发证书时会得到一个与公钥配对的私钥。证书会在通信过程中传给客户端，客户端也可以放一个，用来对比和服务端传过来的是不是一致<br>
+        
+          <a class="article-more-a" href="/2018/03/15/iOS-https防止中间人攻击/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">https</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/iOS//" class="article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/15/iOS-https防止中间人攻击/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Object-Subscripting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -960,99 +1047,6 @@ ga('send', 'pageview');
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/01/10/UITableView 性能优化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-objc-runtime" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/06/objc-runtime/">objc runtime 消息发送</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/06/objc-runtime/" class="archive-article-date">
-  	<time datetime="2018-01-06T14:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="objective-c-函数的转换"><a href="#objective-c-函数的转换" class="headerlink" title="objective-c 函数的转换"></a>objective-c 函数的转换</h3><p>比如有如下一个函数<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ASRTTModel.m</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"ASRTTModel.h"</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;objc/message.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ASRTTModel</span></span></span><br><span class="line">+ (<span class="keyword">void</span>)func1 &#123;</span><br><span class="line">    printf(<span class="string">"%s"</span>, __FUNCTION__);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
-<p>在终端运行下面代码，会生成一个ASRTTModel.cpp文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clang -rewrite-objc ASRTTModel.m</span><br></pre></td></tr></table></figure></p>
-<p>在该文件中，我们会发现上面方法被转换成c函数实现<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这是 func1 的IMP</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> _C_ASRTTModel_func1(Class <span class="keyword">self</span>, SEL _cmd) &#123;</span><br><span class="line">    printf(<span class="string">"%s"</span>, __FUNCTION__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2018/01/06/objc-runtime/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">objective c</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">objc runtime</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ios//" class="article-tag-list-link color4">ios</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/06/objc-runtime/">展开全文 >></a>
         </p>
       
 

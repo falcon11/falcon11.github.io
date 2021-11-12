@@ -174,6 +174,103 @@ ga('send', 'pageview');
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-App间跳转" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/23/App间跳转/">App间跳转</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/23/App间跳转/" class="archive-article-date">
+  	<time datetime="2019-02-23T01:34:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS篇"><a href="#iOS篇" class="headerlink" title="iOS篇"></a>iOS篇</h1><h2 id="schema"><a href="#schema" class="headerlink" title="schema"></a>schema</h2><p>schema是iOS9之前比较主流的一种跳转方案了， 更多的是用在了两个APP相互跳转中。也可以在Safari中输入 <code>schema://</code> 跳转到App内部<br>比如在浏览器输入 <code>wechat://</code> 就可以跳到微信</p>
+<h3 id="使用URL-Scheme-跳转到系统"><a href="#使用URL-Scheme-跳转到系统" class="headerlink" title="使用URL Scheme 跳转到系统"></a>使用URL Scheme 跳转到系统</h3><p>要跳转到别人的app，就要知道别人的app的跳转协议是什么，需要传入什么参数，我们常见的跳转到系统有下面这些：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.打开Mail</span></span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"mailto:frank@wwdcdemo.example.com"</span>]]</span><br><span class="line"><span class="comment">// 2.打开电话</span></span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"tel:1-408-555-5555"</span>]];</span><br><span class="line"><span class="comment">// 3.打开SMS</span></span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"sms:1-408-555-1212"</span>]];</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2019/02/23/App间跳转/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">url-scheme</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">universal links</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ios//" class="article-tag-list-link color4">ios</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ios/android//" class="article-tag-list-link color3">android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/23/App间跳转/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-react-native-bugly-集成与分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -956,93 +1053,6 @@ ga('send', 'pageview');
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/04/11/UIViewController-Lifecycle/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS-https防止中间人攻击" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/15/iOS-https防止中间人攻击/">iOS https防止中间人攻击</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/15/iOS-https防止中间人攻击/" class="archive-article-date">
-  	<time datetime="2018-03-14T17:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="“公钥”-和-“私钥”"><a href="#“公钥”-和-“私钥”" class="headerlink" title="“公钥” 和 “私钥”"></a>“公钥” 和 “私钥”</h2><p>首先要明白两个概念“公钥”和“私钥”，<br><strong>“公钥”</strong> 可以理解成锁头，<strong>“私钥”</strong> 就是钥匙。我们可以把 <strong>“公钥”</strong> 给客户端用来加密数据，当数据传回来时再用私钥解开加密就可以看到真正的内容了。<br>https数字证书：里面包含公钥，一般签发证书时会得到一个与公钥配对的私钥。证书会在通信过程中传给客户端，客户端也可以放一个，用来对比和服务端传过来的是不是一致<br>
-        
-          <a class="article-more-a" href="/2018/03/15/iOS-https防止中间人攻击/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">https</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/iOS//" class="article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/15/iOS-https防止中间人攻击/">展开全文 >></a>
         </p>
       
 

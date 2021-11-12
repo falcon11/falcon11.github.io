@@ -174,6 +174,91 @@ ga('send', 'pageview');
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-eggjs-反向代理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/12/eggjs-反向代理/">eggjs 反向代理</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/12/eggjs-反向代理/" class="archive-article-date">
+  	<time datetime="2021-11-12T02:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一篇文章讲了 <code>umi</code> 开启 <code>ssr</code> 然后使用 <code>eggjs</code> 进行渲染的相关内容。这篇文章趁热打铁，讲一下怎么使用 <code>eggjs</code> 反向代理。</p>
+<h2 id="安装需要用到的插件"><a href="#安装需要用到的插件" class="headerlink" title="安装需要用到的插件"></a>安装需要用到的插件</h2><p>需要用到如下插件:</p>
+<ol>
+<li><code>koa2-connect</code></li>
+<li><code>http-proxy-middleware</code></li>
+</ol>
+<p>安装插件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add koa2-connect http-proxy-middleware</span><br></pre></td></tr></table></figure>
+<h2 id="修改-router-js-代码"><a href="#修改-router-js-代码" class="headerlink" title="修改 router.js 代码"></a>修改 <code>router.js</code> 代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"><span class="comment">// 导入需要用到的插件</span></span><br><span class="line"><span class="keyword">const</span> &#123; createProxyMiddleware &#125; = <span class="built_in">require</span>(<span class="string">'http-proxy-middleware'</span>);</span><br><span class="line"><span class="keyword">const</span> c2k = <span class="built_in">require</span>(<span class="string">'koa2-connect'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理配置</span></span><br><span class="line"><span class="keyword">const</span> httpbinProxyOptions = &#123;</span><br><span class="line">  target: <span class="string">'https://httpbin.org'</span>, <span class="comment">//要代理的地址</span></span><br><span class="line">  changeOrigin: <span class="literal">true</span>,</span><br><span class="line">  pathRewrite: &#123;</span><br><span class="line">    <span class="string">'^/api'</span>: <span class="string">''</span>, <span class="comment">// 路径重写，后面我们会在 router 配置所有 /api 开头的请求都走该代理</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// createProxyMiddleware 创建 express 类型的代理中间件，c2k 将 express 类型中间件转换成 koa2 类型中间件，eggjs 兼容 koa2 的中间件</span></span><br><span class="line"><span class="keyword">const</span> proxyMiddleware = c2k(createProxyMiddleware(httpbinProxyOptions));</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;Egg.Application&#125; app - egg application</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function">(<span class="params">app</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; router, controller &#125; = app;</span><br><span class="line">  <span class="comment">// router.all 是配置所有请求方法的规则，如果使用 router.get 那么只对 GET 请求进行处理。/api/* 表示所有 /api/ 开头的请求都使用 proxyMiddleware 中间件</span></span><br><span class="line">  router.all(<span class="string">'/api/*'</span>, proxyMiddleware);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="在-web-项目中使用"><a href="#在-web-项目中使用" class="headerlink" title="在 web 项目中使用"></a>在 web 项目中使用</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  fetch(<span class="string">'/api/get?foo=bar'</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'res'</span>, res);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+<p>在控制台看下打印，可以正常接收到请求，表示代理成功</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://github.com/chimurai/http-proxy-middleware/issues/155" target="_blank" rel="noopener">How shall I use http-proxy-middleware in Koa2.0 ?</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/javascript//" class="article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/12/eggjs-反向代理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-eggjs-umi-ssr" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1029,103 +1114,6 @@ Xcode12
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/03/25/h5-输入框被键盘遮挡/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-App间跳转" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/23/App间跳转/">App间跳转</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/23/App间跳转/" class="archive-article-date">
-  	<time datetime="2019-02-23T01:34:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS篇"><a href="#iOS篇" class="headerlink" title="iOS篇"></a>iOS篇</h1><h2 id="schema"><a href="#schema" class="headerlink" title="schema"></a>schema</h2><p>schema是iOS9之前比较主流的一种跳转方案了， 更多的是用在了两个APP相互跳转中。也可以在Safari中输入 <code>schema://</code> 跳转到App内部<br>比如在浏览器输入 <code>wechat://</code> 就可以跳到微信</p>
-<h3 id="使用URL-Scheme-跳转到系统"><a href="#使用URL-Scheme-跳转到系统" class="headerlink" title="使用URL Scheme 跳转到系统"></a>使用URL Scheme 跳转到系统</h3><p>要跳转到别人的app，就要知道别人的app的跳转协议是什么，需要传入什么参数，我们常见的跳转到系统有下面这些：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.打开Mail</span></span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"mailto:frank@wwdcdemo.example.com"</span>]]</span><br><span class="line"><span class="comment">// 2.打开电话</span></span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"tel:1-408-555-5555"</span>]];</span><br><span class="line"><span class="comment">// 3.打开SMS</span></span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"sms:1-408-555-1212"</span>]];</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2019/02/23/App间跳转/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">url-scheme</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">universal links</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ios//" class="article-tag-list-link color4">ios</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ios/android//" class="article-tag-list-link color3">android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/23/App间跳转/">展开全文 >></a>
         </p>
       
 
